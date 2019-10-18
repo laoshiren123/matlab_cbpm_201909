@@ -1,10 +1,10 @@
-clear all;
+clear all
 %%%%%%%ɸѡ
-line1 = 17+1500;
-line2 = 9291+1500;
-line3 = 18470+1500;
-add_ = 800;
-filename_test = 'C:\Users\SongChuangye\Desktop\20190907\20190907shujukku_500pc\x3.txt';
+line1 = 17;
+line2 = 5851;
+line3 = 17415;
+add_ = 5000;
+filename_test = 'C:\Users\SongChuangye\Desktop\201910cbpm\xxx_1.txt';
 m=importfile(filename_test, line1, line1+add_);
 shijian=m(:,2);
 for i=1:length(shijian)
@@ -135,3 +135,35 @@ for i=1:length(shuju)
 end
 shijiannew=[realin1',realin2',realin3',shijian1',shijian2',shijian3'];
 shujunew = [realin1',realin2',realin3',shuju1',shuju2',shuju3'];
+
+data20 = 32.6/59.4*abs(shujunew(:,4))+26.8/59.4*abs(shujunew(:,5))-abs(shujunew(:,6));
+
+std(data20(1:500))
+
+
+a1 = mean(shujunew(:,4));
+a2 = mean(shujunew(:,5));
+a3 = mean(shujunew(:,6));
+
+data11 = shujunew(:,4);
+data21 = shujunew(:,5);
+data31 = shujunew(:,6);
+
+% data21(abs(data11-a1)>0.005)=[];
+% data31(abs(data11-a1)>0.005)=[];
+% data11(abs(data11-a1)>0.005)=[];
+% 
+data11(abs(data21-a2)>0.003)=[];
+data31(abs(data21-a2)>0.003)=[];
+data21(abs(data21-a2)>0.003)=[];
+% 
+% 
+% data11(abs(data31-a3)>0.003)=[]; 
+% data21(abs(data31-a3)>0.003)=[];
+% data31(abs(data31-a3)>0.003)=[];
+
+data20_1 = 26.8/59.4*abs(data21)+32.6/59.4*abs(data11)-abs(data31);
+plot(data20_1)
+%data20_1(data20_1>-0.003)=[];
+vpa(std(data20_1(1:end)))
+
